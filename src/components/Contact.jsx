@@ -45,11 +45,8 @@ export default function Contact() {
     setStatus("Sending...");
 
     emailjs
-      .sendForm(
-        "service_xts88u2", // Replace with EmailJS service ID
-        "template_d4yvorf", // Replace with EmailJS template ID
+      .sendForm(        
         formRef.current,
-        "bOLEi-PIMhHrFHWQh" // Replace with EmailJS public key
       )
       .then(
         (result) => {
