@@ -1,6 +1,6 @@
 import ParticlesBackground from './ParticlesBackground'
 import emoji from '../assets/Emoji.png'
-import emojiDrak from '../assets/EmojiLight.png'
+import emojiDrak from '../assets/emojiLight.png'
 import { ThemeContext } from '../contexts/ThemeContext'
 import { useContext } from 'react'
 
