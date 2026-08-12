@@ -1,21 +1,3 @@
-// import './App.css'
-// import SideHeader from './components/SideHeader'
-// import { Outlet, useLocation } from 'react-router-dom'
-// import { useEffect, useState } from 'react'
-
-// function App() {
-//   return (
-//     <>
-//       <main className="laptop:flex-row font-quicksand flex flex-col">
-//         <SideHeader />
-
-//         <Outlet />
-//       </main>
-//     </>
-//   )
-// }
-
-// export default App
 
 import { Routes, Route, useLocation } from 'react-router-dom'
 import PageTransition from './components/PageTransition'
@@ -63,30 +45,4 @@ function App() {
 export default App
 
 
-// import { AnimatePresence, motion } from 'framer-motion'
-// import { Outlet, useLocation } from 'react-router-dom'
-// import SideHeader from './components/SideHeader'
 
-// export default function App() {
-//   const location = useLocation()
-
-//   return (
-//     <main className="font-quicksand flex">
-//       <SideHeader />
-//       <div className="relative w-full overflow-hidden">
-//         <AnimatePresence mode="wait">
-//           <motion.div
-//             key={location.pathname}
-//             initial={{ opacity: 0, x: 200, rotateY: 45 }}
-//             animate={{ opacity: 1, x: 0, rotateY: 0 }}
-//             exit={{ opacity: 0, x: -200, rotateY: -45 }}
-//             transition={{ duration: 0.8, ease: 'easeInOut' }}
-//             className="absolute inset-0"
-//           >
-//             <Outlet />
-//           </motion.div>
-//         </AnimatePresence>
-//       </div>
-//     </main>
-//   )
-// }

@@ -21,13 +21,4 @@ const PageTransition = ({ children }) => {
 
 export default PageTransition
 
-// {
-//   /* <motion.div
-//         key={location.pathname}
-//         initial={{ opacity: 0, x: 100 }}       // Page enters from right
-//         animate={{ opacity: 1, x: 0 }}         // Center position
-//         exit={{ opacity: 0, x: -100 }}         // Slides to left on exit
-//         transition={{ duration: 0.6, ease: "easeInOut" }}
-//         className="min-h-screen"
-//       > */
-// }
+
