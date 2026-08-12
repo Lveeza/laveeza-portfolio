@@ -5,16 +5,6 @@ import { useContext } from 'react'
 export default function About() {
   const skills = [
     {
-      name: 'HTML',
-      level: 95,
-      description: 'Expert level knowledge of semantic HTML5',
-    },
-    {
-      name: 'Tailwind',
-      level: 90,
-      description: 'Expert level knowledge of modern CSS3 techniques',
-    },
-    {
       name: 'JavaScript',
       level: 85,
       description:
@@ -26,6 +16,31 @@ export default function About() {
       description:
         'Experience with React hooks, state management, and component architecture',
     },
+    {
+      name: 'PHP',
+      level: 65,
+      description:
+        'Building server-side logic, RESTful APIs, and database-driven features',
+    },
+    {
+      name: 'MySQL',
+      level: 60,
+      description:
+        'Designing schemas, writing queries, and integrating databases with PHP',
+    },
+    {
+      name: 'Shopify',
+      level: 60,
+      description:
+        'Designing schemas, writing queries, and integrating databases with PHP',
+    },
+    {
+      name: 'Wordpress',
+      level: 60,
+      description:
+        'Designing schemas, writing queries, and integrating databases with PHP',
+    },
+
   ]
 
   const [isDark] = useContext(ThemeContext)
@@ -52,30 +67,19 @@ export default function About() {
             <p
               className={`mb-4 leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}
             >
-              Hi, I’m Laveeza — a passionate Frontend Developer who loves
-              turning creative ideas into interactive, user-friendly web
-              experiences. I am building modern web applications using the
-              latest technologies and I've been passionate about creating
-              intuitive and performant digital experiences ever since.
+              Hi, I'm Laveeza — a passionate Full-Stack Developer who loves turning creative ideas into interactive, user-friendly web experiences. I build modern web applications using the latest technologies, working across both the frontend and backend, and I've been passionate about creating intuitive and performant digital experiences ever since.
             </p>
 
             <p
               className={`mb-4 leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}
             >
-              I pursued my studies in Computer Science (ICS) with a focus on
-              Physics, and currently i am doing my Bachelors Degree in Computer
-              Science and also I’m focusing on my Front-End Web Development
-              techniques to polish my professional skills.. I'm constantly learning
-              and staying up to date with modern web trends.
+              I pursued my studies in Computer Science (ICS) with a focus on Physics, and I'm currently doing my Bachelor's Degree in Computer Science. Alongside my studies, I'm sharpening my skills in React, Tailwind CSS, PHP, and MySQL to build complete, end-to-end web solutions. I am also capable of building websites on Shopify and WordPress. I'm constantly learning and staying up to date with modern web trends.
             </p>
 
             <p
               className={`mb-4 leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}
             >
-              When I'm not coding, you’ll find me exploring new ideas,
-              experimenting with designs, or sharing my knowledge. I’m always
-              eager to learn new technologies, collaborate on creative projects,
-              and grow as a developer and build impactful web experiences.
+              I'm always eager to learn new technologies, collaborate on creative projects, and grow as a developer while building impactful web experiences.
             </p>
           </div>
 
@@ -86,7 +90,7 @@ export default function About() {
               <h3
                 className={`relative pb-3 text-2xl font-bold after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-[20%] after:bg-pink-700 after:transition-all after:duration-500 after:content-[''] xl:text-3xl`}
               >
-                Front-end Development
+                Full-Stack Development
               </h3>
 
               <div className="mt-8 flex flex-col gap-5">

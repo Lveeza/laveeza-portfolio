@@ -1,5 +1,5 @@
 import ParticlesBackground from './ParticlesBackground'
-import ecommerce from '../assets/E-commerce.png'
+import qoptix from '../assets/qoptix.png'
 import digitalApp from '../assets/DigitalApp.png'
 import quizApp from '../assets/QuizApp.png'
 import focusApp from '../assets/TodoApp.png'
@@ -11,7 +11,7 @@ import shoe from '../assets/shoeImg.png'
 
 import darkCountry from '../assets/Countries-removebg-preview.png'
 import darkDigitalApp from '../assets/DigitalApp-removebg-preview.png'
-import darkCommerceApp from '../assets/E-commerce-removebg-preview.png'
+import darkQoptix from '../assets/qoptix-remove-img.png'
 import darkFoodApp from '../assets/foodieHamburger-removebg-preview.png'
 import darkGameApp from '../assets/GameApp-removebg-preview.png'
 import darkTodoApp from '../assets/TodoApp-removebg-preview.png'
@@ -27,14 +27,14 @@ export default function Projects() {
 
   const projects = [
     {
-      title: 'E-commerce Store',
+      title: 'Qoptix',
       tagline:
         'A full-stack online store built to deliver a seamless shopping experience. The application features dynamic product listings, responsive design, shopping cart functionality, catogories filter functionality, and a modern UI.',
-      image: ecommerce,
-      DarkImage: darkCommerceApp,
-      liveUrl: 'https://e-commerce-shop-web.netlify.app/',
+      image: qoptix,
+      DarkImage: darkQoptix,
+      liveUrl: 'https://qoptix.pk/',
       codeUrl: 'https://github.com/you/ecommerce-store',
-      tech: ['React', 'Tailwind CSS', 'Firebase'],
+      tech: ['Javascript', 'Shopify liquid'],
     },
     {
       title: 'Digital Marketing App',
@@ -65,48 +65,6 @@ export default function Projects() {
       liveUrl: 'https://resttcountriesapi-project.netlify.app/',
       codeUrl: 'https://github.com/you/piano-app',
       tech: ['HTML', 'Tailwind', 'React'],
-    },
-    {
-      title: 'To-Do App',
-      tagline:
-        'A sleek task-and-focus web application designed to help users to make a checklist of their most important goals each day. The interface allows users to add tasks, set a primary focus, track their progress and do day-to-day tasks.',
-      image: focusApp,
-      DarkImage: darkTodoApp,
-      liveUrl: 'https://focus-on-today-web.netlify.app/',
-      codeUrl: 'https://github.com/you/todo-app',
-      tech: ['JavaScript', 'CSS', 'HTML'],
-    },
-    {
-      title: 'Cards Game',
-      tagline:
-        'A fun engaging JavaScript web game where players must “hit” the each card only one time as they appear. Built for fast performance and fun interaction, the game emphasizes quick thinking, smooth visuals, and simple controls.',
-
-      image: selectGame,
-      DarkImage: darkGameApp,
-      liveUrl: 'https://hit-game-app.netlify.app/',
-      codeUrl: 'https://github.com/you/game-app',
-      tech: ['JavaScript', 'CSS', 'HTML'],
-    },
-    {
-      title: 'Memory Game',
-      tagline:
-        'A fun and interactive memory-matching game built for the web. Players can make the correct pattern that appears under various levels of challenge, improving focus and cognitive skills while enjoying a smooth and responsive experience.',
-      image: memoryGame,
-      DarkImage: darkMemoryGameApp,
-      liveUrl: 'https://memoryfullgame.netlify.app/',
-      codeUrl: 'https://github.com/you/memory-game',
-      tech: ['JavaScript', 'CSS', 'HTML'],
-    },
-    
-    {
-      title: 'Foodie Hamburger',
-      tagline:
-        'A responsive hamburger web app where users can explore delicious burger options with an easy-to-use interface. The project focuses on modern UI design, responsiveness perfect for restaurant-style concepts and responsive designs.',
-      image: foodie,
-      DarkImage: darkFoodApp,
-      liveUrl: 'https://foodiehamburger.netlify.app/',
-      codeUrl: 'https://github.com/you/foodie-app',
-      tech: ['JavaScript', 'CSS', 'HTML'],
     },
     {
       title: 'The Shoe Company',

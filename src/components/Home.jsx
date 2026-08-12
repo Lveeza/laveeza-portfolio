@@ -20,12 +20,12 @@ export default function Home() {
               Hi, I'm Laveeza Jamshaid
             </h1>
             <p className={`mt-2 text-center text-base ${isDark ? 'text-pink-600' : 'text-pink-700'}  md:mt-5 md:text-xl`}>
-              Frontend Web Developer
+              Full-Stack Web Developer
             </p>
             <p className={`mx-auto mt-2 max-w-xl text-center text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-600'}  sm:text-base md:mt-5 xl:text-lg`}>
-              A passionate Frontend Developer having an experience of building
-              responsive, and user-friendly Websites with JavaScript / Reactjs /
-              Tailwind CSS / React and some other cool libraries and frameworks.
+              A passionate Full-Stack Developer with experience building
+              responsive, user-friendly websites using JavaScript, React.js,
+              Tailwind CSS, PHP, MySQL, and other modern libraries and frameworks.
             </p>
           </div>
         </div>
