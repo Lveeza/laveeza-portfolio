@@ -1,143 +1,178 @@
-import ParticlesBackground from './ParticlesBackground'
+import { useContext } from 'react'
+import { ThemeContext } from '../contexts/ThemeContext'
+
+import postagram from '../assets/postgram.png' 
 import qoptix from '../assets/qoptix.png'
 import digitalApp from '../assets/DigitalApp.png'
 import quizApp from '../assets/QuizApp.png'
 import countries from '../assets/Countries.png'
 import shoe from '../assets/shoeImg.png'
 
-import darkCountry from '../assets/Countries-removebg-preview.png'
-import darkDigitalApp from '../assets/DigitalApp-removebg-preview.png'
 import darkQoptix from '../assets/qoptix-remove-img.png'
-import darkShoeApp from '../assets/shoeImg-removebg-preview.png'
+import darkDigitalApp from '../assets/DigitalApp-removebg-preview.png'
 import darkQuizApp from '../assets/QuizApp-removebg-preview.png'
+import darkCountry from '../assets/Countries-removebg-preview.png'
+import darkShoeApp from '../assets/shoeImg-removebg-preview.png'
 
-import { ThemeContext } from '../contexts/ThemeContext'
-import { useContext } from 'react'
+const PROJECTS = [
+  {
+    title: 'Postagram',
+    featured: true,
+    tagline:
+      'A full-stack social media app: Laravel REST API with a React frontend. Users can post photos, videos and text slides, follow people, like, comment, and share 24-hour stories.',
+    highlights: [
+      'Token authentication with Laravel Sanctum, policies, and rate limiting',
+      'N+1-safe API Resources and cursor pagination for infinite scroll',
+      'Queued email and real-time notifications (Redis, Reverb)',
+      'Pest test suite and deployment on Railway',
+    ],
+    image: postagram,
+    DarkImage: postagram,
+    liveUrl: 'https://postgram-frontend.vercel.app', 
+    codeUrl: 'https://github.com/Lveeza/postgram-backend',
+    extraLinks: [{ label: 'Frontend code', url: 'https://github.com/Lveeza/postgram-frontend' }],
+    tech: ['Laravel', 'PHP', 'MySQL', 'React', 'Tailwind', 'Redis', 'Pest'],
+  },
+  {
+    title: 'Qoptix',
+    tagline:
+      'A live Shopify store for a real client, with a custom Liquid theme, product filtering by category, a cart, and a virtual try-on feature.',
+    image: qoptix,
+    DarkImage: darkQoptix,
+    liveUrl: 'https://qoptix.pk/',
+    tech: ['Shopify Liquid', 'JavaScript', 'CSS'],
+  },
+  {
+    title: 'Digital Marketing App',
+    tagline:
+      'A responsive landing page for a digital marketing service, with interactive sections and a fully mobile-friendly layout.',
+    image: digitalApp,
+    DarkImage: darkDigitalApp,
+    liveUrl: 'https://digital-marketing-apps.netlify.app/',
+    tech: ['React', 'Tailwind', 'HTML'],
+  },
+  {
+    title: 'Quiz App',
+    tagline:
+      'A multiple-choice quiz that tracks your score, shows the correct answers, and works well on every screen size.',
+    image: quizApp,
+    DarkImage: darkQuizApp,
+    liveUrl: 'https://quizappo.netlify.app/',
+    tech: ['JavaScript', 'CSS', 'HTML'],
+  },
+  {
+    title: 'Countries',
+    tagline:
+      'Explore countries with the REST Countries API: search by name, filter by region, and open a detail view for each country.',
+    image: countries,
+    DarkImage: darkCountry,
+    liveUrl: 'https://resttcountriesapi-project.netlify.app/',
+    tech: ['React', 'Tailwind', 'REST API'],
+  },
+  {
+    title: 'The Shoe Company',
+    tagline:
+      'A responsive shoe store website with smooth animations and a clean product showcase layout.',
+    image: shoe,
+    DarkImage: darkShoeApp,
+    liveUrl: 'https://shoe-company-website.netlify.app/',
+    tech: ['JavaScript', 'Tailwind', 'HTML'],
+  },
+]
+
+function LinkButton({ href, children, primary }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`rounded-md px-3 py-1.5 text-sm font-semibold transition hover:scale-105 ${
+        primary
+          ? 'bg-pink-600 text-white hover:bg-pink-700'
+          : 'border border-pink-500 text-pink-500 hover:bg-pink-500/10'
+      }`}
+    >
+      {children}
+    </a>
+  )
+}
 
 export default function Projects() {
   const [isDark] = useContext(ThemeContext)
-
-  const projects = [
-    {
-      title: 'Qoptix',
-      tagline:
-        'A full-stack online store built to deliver a seamless shopping experience. The application features dynamic product listings, responsive design, shopping cart functionality, catogories filter functionality, and a modern UI.',
-      image: qoptix,
-      DarkImage: darkQoptix,
-      liveUrl: 'https://qoptix.pk/',
-      codeUrl: 'https://github.com/you/ecommerce-store',
-      tech: ['Javascript', 'Shopify liquid'],
-    },
-    {
-      title: 'Digital Marketing App',
-      tagline:
-        'A modern, responsive landing-page application designed to showcase digital marketing services and features with engaging visuals and interactive elements. A user can enjoy fully responsive experiance at this website.',
-      image: digitalApp,
-      DarkImage: darkDigitalApp,
-      liveUrl: 'https://digital-marketing-apps.netlify.app/',
-      codeUrl: 'https://github.com/you/digital-marketing-app',
-      tech: ['React', 'Tailwind', 'HTML'],
-    },
-    {
-      title: 'Quiz App',
-      tagline:
-        'An interactive quiz application where users can test their knowledge through multiple-choice questions. It dynamically tracks the score, shows correct answers, and provides a smooth, amd a perfect responsive experience.',
-      image: quizApp,
-      DarkImage: darkQuizApp,
-      liveUrl: 'https://quizappo.netlify.app/',
-      codeUrl: 'https://github.com/you/quiz-app',
-      tech: ['JavaScript', 'CSS', 'HTML'],
-    },
-    {
-      title: 'Countries',
-      tagline:
-        'A responsive web application built using the REST Countries API that allows users to explore detailed information about countries around the world. Users can search for any country by name, filter by region, and view key details.',
-      image: countries,
-      DarkImage: darkCountry,
-      liveUrl: 'https://resttcountriesapi-project.netlify.app/',
-      codeUrl: 'https://github.com/you/piano-app',
-      tech: ['HTML', 'Tailwind', 'React'],
-    },
-    {
-      title: 'The Shoe Company',
-      tagline:
-        'A modern and responsive shoe company website built using HTML, tailwind, and JavaScript. It features a clean design, smooth animations, and showcases stylish footwear collections with an elegant layout.',
-      image: shoe,
-      DarkImage: darkShoeApp,
-      liveUrl: 'https://shoe-company-website.netlify.app/',
-      codeUrl: 'https://github.com/you/foodie-app',
-      tech: ['JavaScript', 'Tailwind', 'HTML'],
-    },
-  ]
+  const heading = isDark ? 'text-[#f5f5f5]' : 'text-black'
+  const body = isDark ? 'text-gray-400' : 'text-gray-600'
 
   return (
-    <section className="pc:w-[80%] relative mx-auto flex min-h-screen w-full items-center justify-center overflow-hidden px-3">
-      <ParticlesBackground />
+    <section className="relative mx-auto w-full px-4 py-24 laptop:py-12 pc:w-[80%]">
+      <h1 className={`text-center text-3xl font-medium laptop:text-5xl ${heading}`}>
+        My Projects
+      </h1>
 
-      <div className="relative z-10 px-4 py-24 laptop:py-12">
-        <h1
-          className={`text-center ${isDark ? 'text-[#f5f5f5]' : 'text-[#000]'} text-3xl font-medium laptop:text-5xl`}
-        >
-          My Projects
-        </h1>
+      <div className="mt-20 grid grid-cols-1 justify-items-center gap-5 md:grid-cols-2 xl:gap-10">
+        {PROJECTS.map((p, index) => (
+          <article
+            key={p.title}
+            className={`group w-full max-w-[650px] overflow-hidden rounded-2xl border bg-white/5 transition-shadow duration-300 ${
+              p.featured ? 'md:col-span-2' : ''
+            } ${
+              isDark
+                ? 'border-black shadow-[0_0_30px_#3b3b63] hover:shadow-[0_0_40px_#3b3b63]'
+                : 'border-gray-200 shadow-[0_0_30px_#f5b3d3] hover:shadow-[0_0_40px_#d192b1]'
+            }`}
+          >
+            <img
+              src={isDark ? p.DarkImage : p.image}
+              alt={`${p.title} screenshot`}
+              width="650"
+              height="320"
+              loading={index < 2 ? 'eager' : 'lazy'}
+              decoding="async"
+              className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105 sm:h-72 md:h-80"
+            />
 
-        <div className="mt-20 grid grid-cols-1 items-center justify-center gap-5 backdrop-blur-sm sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-2 xl:gap-10">
-          {projects.map((p) => (
-            <div
-              key={p.title}
-              className={`group relative w-full max-w-[650px] overflow-hidden rounded-2xl border bg-white/5 ${isDark ? 'border-black' : 'border-gray-200 '} ${isDark ? 'shadow-[0_0_30px_#3b3b63]' : 'shadow-[0_0_30px_#f5b3d3]'} transition-all duration-300 ${isDark ? 'hover:shadow-[0_0_40px_#3b3b63]' : 'hover:shadow-[0_0_40px_#d192b1]'}`}
-            >
-              <img
-                src={` ${isDark ? p.DarkImage : p.image} `}
-                alt={p.title}
-                className={`h-64 w-full object-cover ${isDark ? 'shadow-[0_0_20px_#54424b]' : 'shadow-[0_0_30px_#f5b3d3]'} transition-transform duration-500 group-hover:scale-105 sm:h-72 md:h-80`}
-              />
+            <div className="p-5">
+              <div className="flex items-center gap-2">
+                <h2 className={`text-xl font-semibold ${heading}`}>{p.title}</h2>
+                {p.featured && (
+                  <span className="rounded-full bg-pink-600 px-2 py-0.5 text-xs font-semibold text-white">
+                    Featured
+                  </span>
+                )}
+              </div>
 
-              <div className="p-5">
-                <h3
-                  className={`text-xl ${isDark ? 'text-[#f5f5f5]' : 'text-[#000]'} font-semibold`}
-                >
-                  {p.title}
-                </h3>
-                <p
-                  className={`mt-2 text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'} `}
-                >
-                  {p.tagline}
-                </p>
+              <p className={`mt-2 text-sm ${body}`}>{p.tagline}</p>
 
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {p.tech.map((t) => (
-                    <span
-                      key={t}
-                      className={`rounded-full ${isDark ? 'bg-pink-300' : 'bg-pink-100'} px-2 py-1 text-xs font-semibold text-pink-600`}
-                    >
-                      {t}
-                    </span>
+              {p.highlights && (
+                <ul className={`mt-3 list-disc space-y-1 pl-5 text-sm ${body}`}>
+                  {p.highlights.map((h) => (
+                    <li key={h}>{h}</li>
                   ))}
-                </div>
+                </ul>
+              )}
 
-                <div className="flex items-center justify-end">
-                  <div className="group relative flex w-[70px] flex-col items-center text-pink-600">
-                    <p
-                      className={`absolute -top-6 ${isDark ? 'text-[#f5f5f5]' : 'text-[#000]'} hidden text-sm font-medium italic group-hover:block`}
-                    >
-                      Live Demo
-                    </p>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {p.tech.map((t) => (
+                  <li
+                    key={t}
+                    className={`rounded-full px-2 py-1 text-xs font-semibold ${
+                      isDark ? 'bg-pink-900/40 text-pink-300' : 'bg-pink-100 text-pink-700'
+                    }`}
+                  >
+                    {t}
+                  </li>
+                ))}
+              </ul>
 
-                    <a
-                      href={p.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="transform rounded-md border border-pink-400 px-2 py-1 text-pink-400 transition hover:scale-110 hover:shadow-[0_0_20px_#f5b3d3]"
-                    >
-                      <i className="fa-regular fa-share-from-square"></i>
-                    </a>
-                  </div>
-                </div>
+              <div className="mt-5 flex flex-wrap justify-end gap-2">
+                {p.codeUrl && <LinkButton href={p.codeUrl}>Code</LinkButton>}
+                {p.extraLinks?.map((l) => (
+                  <LinkButton key={l.url} href={l.url}>{l.label}</LinkButton>
+                ))}
+                {p.liveUrl && <LinkButton href={p.liveUrl} primary>Live Demo</LinkButton>}
               </div>
             </div>
-          ))}
-        </div>
+          </article>
+        ))}
       </div>
     </section>
   )

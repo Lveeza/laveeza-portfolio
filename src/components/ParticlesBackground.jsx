@@ -4,9 +4,11 @@ import { loadSlim } from '@tsparticles/slim'
 
 
 const OPTIONS = {
+  fullScreen: { enable: false },
   fpsLimit: 60,
   detectRetina: false,
   interactivity: {
+    detectsOn: 'window',
     events: { onHover: { enable: true, mode: 'repulse' } },
     modes: { repulse: { distance: 100, duration: 0.4 } },
   },

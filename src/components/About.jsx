@@ -1,123 +1,91 @@
-import ParticlesBackground from './ParticlesBackground'
-import { ThemeContext } from '../contexts/ThemeContext'
 import { useContext } from 'react'
+import { ThemeContext } from '../contexts/ThemeContext'
+
+const SKILL_GROUPS = [
+  {
+    title: 'Frontend',
+    summary: 'Responsive UIs with React hooks, reusable components, and Tailwind CSS.',
+    items: ['JavaScript (ES6+)', 'React', 'Tailwind CSS', 'React Router'],
+  },
+  {
+    title: 'Backend',
+    summary: 'REST APIs with authentication, validation, caching, and automated tests.',
+    items: ['PHP 8', 'Laravel', 'MySQL', 'Sanctum', 'Redis', 'Pest'],
+  },
+  {
+    title: 'E-commerce & CMS',
+    summary: 'Custom themes and client-ready stores.',
+    items: ['Shopify Liquid', 'WordPress'],
+  },
+  {
+    title: 'Tools & Deployment',
+    summary: 'Version control, API testing, and production deployment.',
+    items: ['Git & GitHub', 'Docker', 'Postman', 'Railway'],
+  },
+]
 
 export default function About() {
-  const skills = [
-    {
-      name: 'JavaScript',
-      level: 85,
-      description:
-        'Strong proficiency in ES6+, DOM manipulation, and modern frameworks',
-    },
-    {
-      name: 'React',
-      level: 75,
-      description:
-        'Experience with React hooks, state management, and component architecture',
-    },
-    {
-      name: 'PHP',
-      level: 65,
-      description:
-        'Building server-side logic, RESTful APIs, and database-driven features',
-    },
-    {
-      name: 'MySQL',
-      level: 60,
-      description:
-        'Designing schemas, writing queries, and integrating databases with PHP',
-    },
-    {
-      name: 'Shopify',
-      level: 60,
-      description:
-        'Designing schemas, writing queries, and integrating databases with PHP',
-    },
-    {
-      name: 'Wordpress',
-      level: 60,
-      description:
-        'Designing schemas, writing queries, and integrating databases with PHP',
-    },
-
-  ]
-
   const [isDark] = useContext(ThemeContext)
+  const heading = isDark ? 'text-[#f5f5f5]' : 'text-black'
+  const body = isDark ? 'text-gray-300' : 'text-gray-700'
 
   return (
-    <section className="relative flex min-h-screen w-full items-center justify-center overflow-hidden px-5 py-28">
-      <ParticlesBackground />
-
-      <div className="relative z-10 flex flex-col items-center justify-center text-black">
-        <h1
-          className={` ${isDark ? 'text-[#f5f5f5]' : 'text-[#000]'} text-center text-4xl font-bold laptop:text-5xl`}
-        >
+    <section className="relative flex min-h-dvh w-full items-center justify-center px-5 py-28">
+      <div className="relative z-10 w-full max-w-6xl">
+        <h1 className={`text-center text-4xl font-bold laptop:text-5xl ${heading}`}>
           About Me
         </h1>
 
-        <div className="mx-auto mt-16 flex w-full max-w-6xl flex-col items-center gap-5 laptop:flex-row laptop:gap-2">
-          <div className="relative w-full pl-3 xl:pl-5 before:absolute before:left-0 before:top-2 before:h-full before:w-[2px] before:bg-pink-700 before:content-[''] after:absolute after:-top-2 after:left-[-6px] after:h-4 after:w-4 after:rounded-full after:border-[2px] after:border-pink-700 after:bg-transparent after:content-[''] laptop:w-1/2">
-            <h4
-              className={`mb-6 ${isDark ? 'text-[#f5f5f5]' : 'text-[#000]'} text-2xl font-semibold`}
-            >
-              It’s me!
-            </h4>
-
-            <p
-              className={`mb-4 leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}
-            >
-              Hi, I'm Laveeza — a passionate Full-Stack Developer who loves turning creative ideas into interactive, user-friendly web experiences. I build modern web applications using the latest technologies, working across both the frontend and backend, and I've been passionate about creating intuitive and performant digital experiences ever since.
+        <div className="mt-16 flex flex-col items-start gap-8 laptop:flex-row laptop:gap-6">
+          {/* Story */}
+          <div className="relative w-full pl-4 laptop:w-1/2 before:absolute before:left-0 before:top-2 before:h-full before:w-[2px] before:bg-pink-700 before:content-['']">
+            <h2 className={`mb-6 text-2xl font-semibold ${heading}`}>It's me!</h2>
+            <p className={`mb-4 leading-relaxed ${body}`}>
+              Hi, I'm Laveeza, a self-taught full-stack developer. I build React
+              frontends and Laravel REST APIs, and I care about clean code, security,
+              and tested features.
             </p>
-
-            <p
-              className={`mb-4 leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}
-            >
-              I pursued my studies in Computer Science (ICS) with a focus on Physics, and I'm currently doing my Bachelor's Degree in Computer Science. Alongside my studies, I'm sharpening my skills in React, Tailwind CSS, PHP, and MySQL to build complete, end-to-end web solutions. I am also capable of building websites on Shopify and WordPress. I'm constantly learning and staying up to date with modern web trends.
+            <p className={`mb-4 leading-relaxed ${body}`}>
+              My main project is <strong>Postagram</strong>, a deployed social media
+              app with authentication, stories, real-time notifications, and a
+              Pest test suite. I also completed an internship at Roots and built
+              QOptix, a live Shopify store with a virtual try-on feature.
             </p>
-
-            <p
-              className={`mb-4 leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}
-            >
-              I'm always eager to learn new technologies, collaborate on creative projects, and grow as a developer while building impactful web experiences.
+            <p className={`mb-4 leading-relaxed ${body}`}>
+              I'm currently pursuing a Bachelor's degree in Computer Science, and I'm
+              looking for a full-stack role where I can keep growing.
             </p>
           </div>
 
+          {/* Skills */}
           <div
-            className={`w-full rounded-xl border border-pink-300 laptop:w-1/2 ${isDark ? 'text-[#f5f5f5]' : 'text-[#000]'} ${isDark ? 'bg-[#2d1b2e]' : 'bg-white/40'} p-5 shadow-sm backdrop-blur-sm`}
+            className={`w-full rounded-xl border border-pink-300 p-5 shadow-sm laptop:w-1/2 ${
+              isDark ? 'bg-[#2d1b2e]/90 text-[#f5f5f5]' : 'bg-white/70 text-black'
+            }`}
           >
-            <div data-aos="fade-up" data-aos-delay="200">
-              <h3
-                className={`relative pb-3 text-2xl font-bold after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-[20%] after:bg-pink-700 after:transition-all after:duration-500 after:content-[''] xl:text-3xl`}
-              >
-                Full-Stack Development
-              </h3>
+            <h2 className="relative pb-3 text-2xl font-bold xl:text-3xl after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-1/5 after:bg-pink-700 after:content-['']">
+              Full-Stack Development
+            </h2>
 
-              <div className="mt-8 flex flex-col gap-5">
-                {skills.map((skill, index) => (
-                  <div key={index}>
-                    <h4 className="-mb-5 text-base font-semibold">
-                      {skill.name}
-                    </h4>
-
-                    <div className="flex flex-col items-end font-semibold">
-                      <span>{skill.level}%</span>
-                      <div className="h-[7px] w-full rounded-md bg-gray-300">
-                        <div
-                          className="h-[7px] rounded-md bg-pink-600 transition-all duration-500"
-                          style={{ width: `${skill.level}%` }}
-                        ></div>
-                      </div>
-                    </div>
-
-                    <p
-                      className={`mt-2 text-sm ${isDark ? 'text-gray-400' : 'text-gray-700'}`}
-                    >
-                      {skill.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
+            <div className="mt-8 flex flex-col gap-6">
+              {SKILL_GROUPS.map((group) => (
+                <div key={group.title}>
+                  <h3 className="text-base font-semibold">{group.title}</h3>
+                  <p className={`mt-1 text-sm ${isDark ? 'text-gray-400' : 'text-gray-700'}`}>
+                    {group.summary}
+                  </p>
+                  <ul className="mt-3 flex flex-wrap gap-2">
+                    {group.items.map((item) => (
+                      <li
+                        key={item}
+                        className={`rounded-full border border-pink-600 px-3 py-1 text-sm ${isDark ? 'text-pink-400' : 'text-pink-700'}`}
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
           </div>
         </div>

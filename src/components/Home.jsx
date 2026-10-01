@@ -1,32 +1,14 @@
-import { lazy, Suspense, useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { ThemeContext } from '../contexts/ThemeContext'
 import emoji from '../assets/Emoji.png'
 import emojiDark from '../assets/emojiLight.png'
 
-const ParticlesBackground = lazy(() => import('./ParticlesBackground'))
-
 export default function Home() {
   const [isDark] = useContext(ThemeContext)
-  const [showParticles, setShowParticles] = useState(false)
-
-  useEffect(() => {
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const isSmallScreen = window.matchMedia('(max-width: 767px)').matches
-    if (reduceMotion || isSmallScreen) return
-
-    const id = setTimeout(() => setShowParticles(true), 500)
-    return () => clearTimeout(id)
-  }, [])
 
   return (
     <div className="relative flex min-h-dvh w-full items-center justify-center overflow-hidden">
-      {showParticles && (
-        <Suspense fallback={null}>
-          <ParticlesBackground />
-        </Suspense>
-      )}
-
       <div className="relative z-10 flex flex-col items-center gap-10 px-4">
         <div className="flex items-center gap-4 md:gap-10">
           <img
@@ -52,16 +34,16 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="ml-32 flex justify-center gap-3 font-semibold sm:gap-5">
+        <div className="flex justify-center gap-3 ml-40 font-semibold sm:gap-5">
           <Link
             to="/projects"
-            className="rounded-full bg-pink-600 px-5 py-2 text-white shadow-[0_0_20px_#ec4899] transition-transform duration-300 hover:scale-105 hover:bg-pink-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600"
+            className="rounded-full bg-pink-600 px-5 py-2 text-white shadow-[0_0_20px_#ec4899] transition-transform duration-300 hover:scale-105 hover:bg-pink-700"
           >
             View Projects
           </Link>
           <Link
             to="/contact"
-            className="rounded-full border-2 border-pink-600 px-5 py-2 text-pink-600 transition-transform duration-300 hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600"
+            className="rounded-full border-2 border-pink-600 px-5 py-2 text-pink-600 transition-transform duration-300 hover:scale-105"
           >
             Contact Me
           </Link>
