@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom'
 import Home from './components/Home'
 import SideHeader from './components/SideHeader'
 import { ThemeContext, ThemeProvider } from './contexts/ThemeContext'
+import PageTransition from './components/PageTransition'
 
 const About = lazy(() => import('./components/About'))
 const Projects = lazy(() => import('./components/Projects'))
@@ -44,6 +45,7 @@ function AppContent() {
 
         <div className="relative z-10 w-full">
          <Suspense fallback={null}>
+          <PageTransition>
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
@@ -51,6 +53,7 @@ function AppContent() {
               <Route path="/certifications" element={<Certifications />} />
               <Route path="/contact" element={<Contact />} />
             </Routes>
+           </PageTransition>
          </Suspense>
         </div>
       </main>
