@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { ThemeContext } from '../contexts/ThemeContext'
 
-import postagram from '../assets/postgram.png' 
+import postagram from '../assets/postgram.png'
 import qoptix from '../assets/qoptix.png'
 import digitalApp from '../assets/DigitalApp.png'
 import quizApp from '../assets/QuizApp.png'
@@ -21,16 +21,22 @@ const PROJECTS = [
     tagline:
       'A full-stack social media app: Laravel REST API with a React frontend. Users can post photos, videos and text slides, follow people, like, comment, and share 24-hour stories.',
     highlights: [
-      'Token authentication with Laravel Sanctum, policies, and rate limiting',
-      'N+1-safe API Resources and cursor pagination for infinite scroll',
-      'Queued email and real-time notifications (Redis, Reverb)',
-      'Pest test suite and deployment on Railway',
+      'Laravel REST API with 26 routes, Sanctum token auth, policies, and rate limiting',
+      'Fixed an N+1 problem: a 10-post feed went from 11 database queries to 2',
+      'Cursor-paginated feed (10 posts per page) with infinite scroll',
+      'Notifications for follows, likes, and comments; 30+ automated Pest tests',
+      'Deployed across Vercel, Supabase, and Aiven',
     ],
     image: postagram,
     DarkImage: postagram,
-    liveUrl: 'https://postgram-frontend.vercel.app', 
+    liveUrl: 'https://postgram-frontend.vercel.app',
     codeUrl: 'https://github.com/Lveeza/postgram-backend',
-    extraLinks: [{ label: 'Frontend code', url: 'https://github.com/Lveeza/postgram-frontend' }],
+    extraLinks: [
+      {
+        label: 'Frontend code',
+        url: 'https://github.com/Lveeza/postgram-frontend',
+      },
+    ],
     tech: ['Laravel', 'PHP', 'MySQL', 'React', 'Tailwind', 'Redis', 'Pest'],
   },
   {
@@ -104,7 +110,9 @@ export default function Projects() {
 
   return (
     <section className="relative mx-auto w-full px-4 py-24 laptop:py-12 pc:w-[80%]">
-      <h1 className={`text-center text-3xl font-medium laptop:text-5xl ${heading}`}>
+      <h1
+        className={`text-center text-3xl font-medium laptop:text-5xl ${heading}`}
+      >
         My Projects
       </h1>
 
@@ -132,7 +140,9 @@ export default function Projects() {
 
             <div className="p-5">
               <div className="flex items-center gap-2">
-                <h2 className={`text-xl font-semibold ${heading}`}>{p.title}</h2>
+                <h2 className={`text-xl font-semibold ${heading}`}>
+                  {p.title}
+                </h2>
                 {p.featured && (
                   <span className="rounded-full bg-pink-600 px-2 py-0.5 text-xs font-semibold text-white">
                     Featured
@@ -155,7 +165,9 @@ export default function Projects() {
                   <li
                     key={t}
                     className={`rounded-full px-2 py-1 text-xs font-semibold ${
-                      isDark ? 'bg-pink-900/40 text-pink-300' : 'bg-pink-100 text-pink-700'
+                      isDark
+                        ? 'bg-pink-900/40 text-pink-300'
+                        : 'bg-pink-100 text-pink-700'
                     }`}
                   >
                     {t}
@@ -166,9 +178,15 @@ export default function Projects() {
               <div className="mt-5 flex flex-wrap justify-end gap-2">
                 {p.codeUrl && <LinkButton href={p.codeUrl}>Code</LinkButton>}
                 {p.extraLinks?.map((l) => (
-                  <LinkButton key={l.url} href={l.url}>{l.label}</LinkButton>
+                  <LinkButton key={l.url} href={l.url}>
+                    {l.label}
+                  </LinkButton>
                 ))}
-                {p.liveUrl && <LinkButton href={p.liveUrl} primary>Live Demo</LinkButton>}
+                {p.liveUrl && (
+                  <LinkButton href={p.liveUrl} primary>
+                    Live Demo
+                  </LinkButton>
+                )}
               </div>
             </div>
           </article>
