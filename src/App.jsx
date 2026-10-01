@@ -1,14 +1,13 @@
 import { lazy, Suspense, useContext, useEffect, useState } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
-import PageTransition from './components/PageTransition'
 import Home from './components/Home'
-import About from './components/About'
-import Projects from './components/Projects'
-import Contact from './components/Contact'
 import SideHeader from './components/SideHeader'
-import Certifications from './components/Certifications'
 import { ThemeContext, ThemeProvider } from './contexts/ThemeContext'
 
+const About = lazy(() => import('./components/About'))
+const Projects = lazy(() => import('./components/Projects'))
+const Certifications = lazy(() => import('./components/Certifications'))
+const Contact = lazy(() => import('./components/Contact'))
 const ParticlesBackground = lazy(() => import('./components/ParticlesBackground'))
 
 function AppContent() {
@@ -32,7 +31,6 @@ function AppContent() {
           isDark ? 'bg-[#111827]' : 'bg-[#fff]'
         }`}
       >
-        {/* Particles: mounted once, never re-created on route change */}
         <div
           className="pointer-events-none fixed inset-y-0 right-0 left-0 z-0 laptop:left-[280px] xl:left-[350px]"
           aria-hidden="true"
@@ -45,7 +43,7 @@ function AppContent() {
         </div>
 
         <div className="relative z-10 w-full">
-          <PageTransition>
+         <Suspense fallback={null}>
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
@@ -53,7 +51,7 @@ function AppContent() {
               <Route path="/certifications" element={<Certifications />} />
               <Route path="/contact" element={<Contact />} />
             </Routes>
-          </PageTransition>
+         </Suspense>
         </div>
       </main>
     </>
