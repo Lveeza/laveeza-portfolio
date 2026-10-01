@@ -1,309 +1,204 @@
-import { useContext, useRef, useState } from "react";
-import emailjs from "emailjs-com";
-import { ThemeContext } from "../contexts/ThemeContext";
-import ParticlesBackground from "./ParticlesBackground";
+import { useContext, useRef, useState } from 'react'
+import emailjs from '@emailjs/browser'
+import { ThemeContext } from '../contexts/ThemeContext'
+
+const EMAIL = 'lveezajamshed@gmail.com'
+const EMAIL_RE = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+
+const validate = ({ name, email, message }) => {
+  const errors = {}
+  if (!name.trim()) errors.name = 'Name is required'
+  if (!email.trim()) errors.email = 'Email is required'
+  else if (!EMAIL_RE.test(email)) errors.email = 'Invalid email format'
+  if (!message.trim()) errors.message = 'Message is required'
+  return errors
+}
+
+function Field({ id, label, error, isDark, children }) {
+  return (
+    <div>
+      <label htmlFor={id} className={`mb-1 block text-sm ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+        {label}
+      </label>
+      {children}
+      {error && (
+        <p id={`${id}-error`} className="mt-1 text-sm text-red-500">
+          {error}
+        </p>
+      )}
+    </div>
+  )
+}
 
 export default function Contact() {
-  const [isDark] = useContext(ThemeContext);
-  const formRef = useRef();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [errors, setErrors] = useState({});
-  const [status, setStatus] = useState("");
+  const [isDark] = useContext(ThemeContext)
+  const formRef = useRef(null)
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' })
+  const [errors, setErrors] = useState({})
+  const [status, setStatus] = useState('idle') 
+
+  const heading = isDark ? 'text-[#f5f5f5]' : 'text-black'
+  const card = `w-full rounded-2xl border border-pink-400/50 px-5 py-5 shadow-lg transition-colors hover:border-pink-400 laptop:w-1/2 ${
+    isDark ? 'bg-black/40 text-white' : 'bg-white/70 text-black'
+  }`
+  const inputBase = 'w-full rounded-lg border bg-transparent px-4 py-2 outline-none'
+  const inputClass = (hasError) =>
+    `${inputBase} ${hasError ? 'border-red-500' : 'border-gray-500 focus:border-pink-400'}`
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    setErrors({ ...errors, [name]: "" });
-    setStatus("");
-  };
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+    setErrors((prev) => ({ ...prev, [name]: '' }))
+    if (status !== 'sending') setStatus('idle')
+  }
 
-  const validate = () => {
-    let newErrors = {};
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    console.log(
+  Boolean(import.meta.env.VITE_EMAILJS_SERVICE_ID),
+  Boolean(import.meta.env.VITE_EMAILJS_TEMPLATE_ID),
+  Boolean(import.meta.env.VITE_EMAILJS_PUBLIC_KEY),
+)
+    if (status === 'sending') return
 
-    if (!formData.name.trim()) newErrors.name = "Name is required";
+    if (formRef.current.elements.company.value) return
 
-    if (!formData.email.trim()) newErrors.email = "Email is required";
-    else if (
-      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email)
-    )
-      newErrors.email = "Invalid email format";
+    const newErrors = validate(formData)
+    setErrors(newErrors)
+    if (Object.keys(newErrors).length > 0) return
 
-    if (!formData.message.trim()) newErrors.message = "Message is required";
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!validate()) return;
-
-    setStatus("Sending...");
-
-    emailjs
-      .sendForm(        
+    setStatus('sending')
+    try {
+      await emailjs.sendForm(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         formRef.current,
+        { publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY },
       )
-      .then(
-        (result) => {
-          setStatus("✅ Message sent successfully!");
-          setFormData({ name: "", email: "", message: "" });
-        },
-        (error) => {
-          console.error("EmailJS Error:", error.text);
-          setStatus("❌ Failed to send message. Please try again later.");
-        }
-      );
-  };
+      setStatus('success')
+      setFormData({ name: '', email: '', message: '' })
+    } catch (error) {
+      console.error('EmailJS error:', error)
+      setStatus('error')
+    }
+  }
 
   return (
-    <section className="relative flex min-h-screen w-full items-center justify-center overflow-hidden px-5 py-28">
-      <ParticlesBackground />
+    <section className="relative flex min-h-dvh w-full items-center justify-center px-5 py-28">
+      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center">
+        <h1 className={`text-center text-4xl font-bold laptop:text-5xl ${heading}`}>Contact</h1>
 
-      <div className="pc:w-[1100px] relative z-10 mx-auto flex w-[700px] flex-col items-center justify-center text-black xl:w-[900px]">
-        <h1
-          className={`${
-            isDark ? "text-[#f5f5f5]" : "text-[#000]"
-          } text-center text-4xl font-bold laptop:text-5xl`}
-        >
-          Contact
-        </h1>
-
-        <div className="mx-auto mt-16 flex w-full max-w-6xl flex-col gap-5 laptop:flex-row laptop:gap-5">
-          {/* Left Section */}
-          <div className="w-full rounded-2xl border border-pink-400/50 bg-white/5 px-5 py-5 shadow-lg backdrop-blur-md transition-all hover:border-pink-400 laptop:w-1/2">
-            <h2 className="mb-6 text-2xl font-semibold text-pink-400">
-              Contact Information
-            </h2>
+        <div className="mt-16 flex w-full flex-col gap-5 laptop:flex-row">
+          {/* Left: info */}
+          <div className={card}>
+            <h2 className="mb-6 text-2xl font-semibold text-pink-400">Contact Information</h2>
             <div className="space-y-5">
               <div>
-                <p className="font-medium text-gray-500">Email</p>
-                <p
-                  className={`text-lg ${
-                    isDark ? "text-[#f5f5f5]" : "text-[#000]"
-                  }`}
-                >
-                  lveezajamshed@gmail.com
-                </p>
+                <p className={`font-medium ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>Email</p>
+                <a href={`mailto:${EMAIL}`} className="text-lg underline-offset-4 hover:underline">
+                  {EMAIL}
+                </a>
               </div>
               <div>
-                <p className="font-medium text-gray-500">Location</p>
-                <p
-                  className={`text-lg ${
-                    isDark ? "text-[#f5f5f5]" : "text-[#000]"
-                  }`}
-                >
-                  Lahore, Pakistan
+                <p className={`font-medium ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>Location</p>
+                <p className="text-lg">Lahore, Pakistan</p>
+              </div>
+              <div>
+                <p className={`font-medium ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>Find me online</p>
+                <p className="flex gap-4 text-lg">
+                  <a href="https://github.com/Lveeza" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                    GitHub
+                  </a>
+                  {/* add your LinkedIn URL below */}
+                  <a href="https://linkedin.com/in/laveeza-jamshaid-153637439" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                    LinkedIn
+                  </a>
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Right: Form */}
-          <div
-            className={`w-full rounded-2xl ${
-              isDark ? "text-white" : "text-black"
-            } border border-pink-400/50 bg-white/5 px-5 py-5 shadow-lg backdrop-blur-md transition-all hover:border-pink-400 laptop:w-1/2`}
-          >
-            <h2 className="mb-6 text-2xl font-semibold text-pink-400">
-              Send Me a Message
-            </h2>
+          {/* Right: form */}
+          <div className={card}>
+            <h2 className="mb-6 text-2xl font-semibold text-pink-400">Send Me a Message</h2>
 
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
-              {/* Name */}
-              <div>
-                <label className="mb-1 block text-sm text-gray-500">Name</label>
+            <form ref={formRef} onSubmit={handleSubmit} noValidate className="space-y-5">
+             
+              <input
+                type="text"
+                name="company"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="absolute -left-[9999px] h-0 w-0 opacity-0"
+              />
+
+              <Field id="name" label="Name" error={errors.name} isDark={isDark}>
                 <input
+                  id="name"
                   type="text"
                   name="name"
+                  autoComplete="name"
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="Your name"
-                  className={`w-full rounded-lg border px-4 py-2 outline-none bg-transparent ${
-                    errors.name
-                      ? "border-red-500"
-                      : "border-gray-600 focus:border-pink-400"
-                  }`}
+                  aria-invalid={Boolean(errors.name)}
+                  aria-describedby={errors.name ? 'name-error' : undefined}
+                  className={inputClass(errors.name)}
                 />
-                {errors.name && (
-                  <p className="text-sm text-red-400 mt-1">{errors.name}</p>
-                )}
-              </div>
+              </Field>
 
-              {/* Email */}
-              <div>
-                <label className="mb-1 block text-sm text-gray-500">Email</label>
+              <Field id="email" label="Email" error={errors.email} isDark={isDark}>
                 <input
+                  id="email"
                   type="email"
                   name="email"
+                  autoComplete="email"
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="Your email"
-                  className={`w-full rounded-lg border px-4 py-2 outline-none bg-transparent ${
-                    errors.email
-                      ? "border-red-500"
-                      : "border-gray-600 focus:border-pink-400"
-                  }`}
+                  aria-invalid={Boolean(errors.email)}
+                  aria-describedby={errors.email ? 'email-error' : undefined}
+                  className={inputClass(errors.email)}
                 />
-                {errors.email && (
-                  <p className="text-sm text-red-400 mt-1">{errors.email}</p>
-                )}
-              </div>
+              </Field>
 
-              {/* Message */}
-              <div>
-                <label className="mb-1 block text-sm text-gray-500">
-                  Message
-                </label>
+              <Field id="message" label="Message" error={errors.message} isDark={isDark}>
                 <textarea
+                  id="message"
                   name="message"
+                  rows="4"
                   value={formData.message}
                   onChange={handleChange}
                   placeholder="Your message"
-                  rows="4"
-                  className={`w-full rounded-lg border px-4 py-2 outline-none bg-transparent ${
-                    errors.message
-                      ? "border-red-500"
-                      : "border-gray-600 focus:border-pink-400"
-                  }`}
+                  aria-invalid={Boolean(errors.message)}
+                  aria-describedby={errors.message ? 'message-error' : undefined}
+                  className={inputClass(errors.message)}
                 />
-                {errors.message && (
-                  <p className="text-sm text-red-400 mt-1">
-                    {errors.message}
-                  </p>
-                )}
-              </div>
+              </Field>
 
-              {/* Button */}
               <button
                 type="submit"
-                className="flex w-full items-center justify-center gap-2 rounded-lg bg-pink-500 py-3 font-semibold text-white transition hover:bg-pink-600"
+                disabled={status === 'sending'}
+                className="flex w-full items-center justify-center rounded-lg bg-pink-600 py-3 font-semibold text-white transition hover:bg-pink-700 disabled:cursor-not-allowed disabled:opacity-60"
               >
-                Send Message ✈️
+                {status === 'sending' ? 'Sending…' : 'Send Message'}
               </button>
             </form>
 
-            {status && (
-              <p
-                className={`mt-4 text-center text-sm ${
-                  status.includes("✅")
-                    ? "text-green-400"
-                    : status.includes("❌")
-                    ? "text-red-400"
-                    : "text-gray-400"
-                }`}
-              >
-                {status}
-              </p>
-            )}
+            <p
+              role="status"
+              aria-live="polite"
+              className={`mt-4 text-center text-sm ${
+                status === 'success' ? 'text-green-500' : status === 'error' ? 'text-red-500' : ''
+              }`}
+            >
+              {status === 'success' && 'Message sent! I will reply soon.'}
+              {status === 'error' && `Could not send your message. Please email me at ${EMAIL}.`}
+            </p>
           </div>
         </div>
       </div>
     </section>
-  );
+  )
 }
-
-
-
-
-// export default function ContactSection() {
-//   const [formData, setFormData] = useState({
-//     name: "",
-//     email: "",
-//     message: "",
-//   });
-
-//   const handleChange = (e) => {
-//     setFormData({ ...formData, [e.target.name]: e.target.value });
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     alert("Message sent successfully!");
-//   };
-
-//   return (
-//     <section className="relative min-h-screen w-full flex items-center justify-center bg-[#0a0a0a] text-white px-5 py-20">
-//       {/* Background particles (optional: replace with your <ParticlesBackground /> component) */}
-//       <div className="absolute inset-0 z-0 opacity-60">
-//         {/* <ParticlesBackground /> */}
-//       </div>
-
-//       <div className="relative z-10 w-full max-w-6xl grid grid-cols-1 laptop:grid-cols-2 gap-10">
-//         {/* Left: Contact Info */}
-//         <div className="rounded-2xl border border-pink-400/30 bg-white/5 backdrop-blur-md p-8 shadow-lg hover:border-pink-400 transition-all">
-//           <h2 className="text-2xl font-semibold mb-6 text-pink-400">
-//             Contact Information
-//           </h2>
-
-//           <div className="space-y-5">
-//             <div>
-//               <p className="text-gray-300 font-medium">Email</p>
-//               <p className="text-lg">hello@yourname.dev</p>
-//             </div>
-//             <div>
-//               <p className="text-gray-300 font-medium">Location</p>
-//               <p className="text-lg">Lahore, Pakistan</p>
-//             </div>
-//           </div>
-//         </div>
-
-//         {/* Right: Contact Form */}
-//         <div className="rounded-2xl border border-pink-400/30 bg-white/5 backdrop-blur-md p-8 shadow-lg hover:border-pink-400 transition-all">
-//           <h2 className="text-2xl font-semibold mb-6 text-pink-400">
-//             Send Me a Message
-//           </h2>
-//           <form onSubmit={handleSubmit} className="space-y-5">
-//             <div>
-//               <label className="block text-sm text-gray-300 mb-1">Name</label>
-//               <input
-//                 type="text"
-//                 name="name"
-//                 value={formData.name}
-//                 onChange={handleChange}
-//                 placeholder="Your name"
-//                 className="w-full rounded-lg bg-transparent border border-gray-600 focus:border-pink-400 outline-none px-4 py-2"
-//                 required
-//               />
-//             </div>
-//             <div>
-//               <label className="block text-sm text-gray-300 mb-1">Email</label>
-//               <input
-//                 type="email"
-//                 name="email"
-//                 value={formData.email}
-//                 onChange={handleChange}
-//                 placeholder="Your email"
-//                 className="w-full rounded-lg bg-transparent border border-gray-600 focus:border-pink-400 outline-none px-4 py-2"
-//                 required
-//               />
-//             </div>
-//             <div>
-//               <label className="block text-sm text-gray-300 mb-1">Message</label>
-//               <textarea
-//                 name="message"
-//                 value={formData.message}
-//                 onChange={handleChange}
-//                 placeholder="Your message"
-//                 rows="4"
-//                 className="w-full rounded-lg bg-transparent border border-gray-600 focus:border-pink-400 outline-none px-4 py-2"
-//                 required
-//               />
-//             </div>
-
-//             <button
-//               type="submit"
-//               className="w-full py-3 bg-pink-500 hover:bg-pink-600 text-white font-semibold rounded-lg flex items-center justify-center gap-2 transition"
-//             >
-//               Send Message ✈️
-//             </button>
-//           </form>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
