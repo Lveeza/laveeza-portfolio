@@ -52,7 +52,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="flex justify-center gap-3 font-semibold sm:gap-5">
+        <div className="ml-32 flex justify-center gap-3 font-semibold sm:gap-5">
           <Link
             to="/projects"
             className="rounded-full bg-pink-600 px-5 py-2 text-white shadow-[0_0_20px_#ec4899] transition-transform duration-300 hover:scale-105 hover:bg-pink-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600"
