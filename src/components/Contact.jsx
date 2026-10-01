@@ -39,7 +39,7 @@ export default function Contact() {
 
   const heading = isDark ? 'text-[#f5f5f5]' : 'text-black'
   const card = `w-full rounded-2xl border border-pink-400/50 px-5 py-5 shadow-lg transition-colors hover:border-pink-400 laptop:w-1/2 ${
-    isDark ? 'bg-black/40 text-white' : 'bg-white/70 text-black'
+    isDark ? 'bg-black/5 text-white' : 'bg-white/70 text-black'
   }`
   const inputBase = 'w-full rounded-lg border bg-transparent px-4 py-2 outline-none'
   const inputClass = (hasError) =>
@@ -54,11 +54,6 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(
-  Boolean(import.meta.env.VITE_EMAILJS_SERVICE_ID),
-  Boolean(import.meta.env.VITE_EMAILJS_TEMPLATE_ID),
-  Boolean(import.meta.env.VITE_EMAILJS_PUBLIC_KEY),
-)
     if (status === 'sending') return
 
     if (formRef.current.elements.company.value) return
@@ -90,7 +85,7 @@ export default function Contact() {
 
         <div className="mt-16 flex w-full flex-col gap-5 laptop:flex-row">
           {/* Left: info */}
-          <div className={card}>
+          <div className={`${card} backdrop-blur-sm`}>
             <h2 className="mb-6 text-2xl font-semibold text-pink-400">Contact Information</h2>
             <div className="space-y-5">
               <div>
@@ -109,7 +104,7 @@ export default function Contact() {
                   <a href="https://github.com/Lveeza" target="_blank" rel="noopener noreferrer" className="hover:underline">
                     GitHub
                   </a>
-                  {/* add your LinkedIn URL below */}
+                 
                   <a href="https://linkedin.com/in/laveeza-jamshaid-153637439" target="_blank" rel="noopener noreferrer" className="hover:underline">
                     LinkedIn
                   </a>
@@ -119,7 +114,7 @@ export default function Contact() {
           </div>
 
           {/* Right: form */}
-          <div className={card}>
+          <div className={`${card} backdrop-blur-sm`}>
             <h2 className="mb-6 text-2xl font-semibold text-pink-400">Send Me a Message</h2>
 
             <form ref={formRef} onSubmit={handleSubmit} noValidate className="space-y-5">

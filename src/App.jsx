@@ -6,6 +6,7 @@ import About from './components/About'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
 import SideHeader from './components/SideHeader'
+import Certifications from './components/Certifications'
 import { ThemeContext, ThemeProvider } from './contexts/ThemeContext'
 
 const ParticlesBackground = lazy(() => import('./components/ParticlesBackground'))
@@ -49,6 +50,7 @@ function AppContent() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/projects" element={<Projects />} />
+              <Route path="/certifications" element={<Certifications />} />
               <Route path="/contact" element={<Contact />} />
             </Routes>
           </PageTransition>
