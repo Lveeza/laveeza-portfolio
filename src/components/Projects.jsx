@@ -16,7 +16,7 @@ import darkShoeApp from '../assets/shoeImg-removebg-preview.png'
 
 const PROJECTS = [
   {
-    title: 'Postagram',
+    title: 'Postgram',
     featured: true,
     tagline:
       'A full-stack social media app: Laravel REST API with a React frontend. Users can post photos, videos and text slides, follow people, like, comment, and share 24-hour stories.',
