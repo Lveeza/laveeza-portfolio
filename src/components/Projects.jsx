@@ -1,6 +1,8 @@
 import { useContext } from 'react'
 import { ThemeContext } from '../contexts/ThemeContext'
 
+import NotesDocs from '../assets/notes-api-docs.png'
+
 import postagram from '../assets/postgram.png'
 import qoptix from '../assets/qoptix.png'
 import digitalApp from '../assets/DigitalApp.png'
@@ -15,9 +17,36 @@ import darkCountry from '../assets/Countries-removebg-preview.png'
 import darkShoeApp from '../assets/shoeImg-removebg-preview.png'
 
 const PROJECTS = [
+   {
+    title: 'Notes API | NestJS, Prisma, Vitest, Docker',
+    featured: false,
+    tagline:
+      'A secure REST API where each user manages private notes. Includes JWT login, per-user data ownership, rate limiting, and automated tests.',
+    highlights: [
+      'Auth & Ownership: JWT + argon2 login, rate limiting, and strict data isolation (returns 404 instead of 403 to prevent enumeration)',
+      'Safe Search & Pagination: Escaped SQL LIKE wildcards (%) after catching a bug in tests where % matched every note',
+      'Error Hardening: Generic 500 responses with server-side logs.',
+      'Isolated Testing: Separate test database with 61 automated Vitest tests running on a green CI pipeline',
+      'Docker & CI: Containerized with persistent data across restarts and an automated green CI pipeline',
+    ],
+    image: NotesDocs,
+    DarkImage: NotesDocs,
+    codeUrl: 'https://github.com/Lveeza/notes-nest',
+    // extraLinks: [
+    //   {
+    //     label: 'API docs',
+    //     // url: '/screenshots/notes-api-docs.png',
+    //   },
+    //   {
+    //     label: 'Green CI run',
+    //     // url: '/screenshots/notes-api-ci.png', // Replace with path/URL to your green CI screenshot
+    //   },
+    // ],
+    tech: ['NestJS', 'TypeScript', 'Prisma', 'PostgreSQL', 'Vitest', 'Docker'],
+  },
   {
     title: 'Postgram',
-    featured: true,
+    featured: false,
     tagline:
       'A full-stack social media app: Laravel REST API with a React frontend. Users can post photos, videos and text slides, follow people, like, comment, and share 24-hour stories.',
     highlights: [

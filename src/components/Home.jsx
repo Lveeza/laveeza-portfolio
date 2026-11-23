@@ -25,11 +25,11 @@ export default function Home() {
               Hi, I'm Laveeza Jamshaid
             </h1>
             <p className={`mt-2 text-base md:mt-5 md:text-xl ${isDark ? 'text-pink-500' : 'text-pink-700'}`}>
-              Full-Stack Developer · Laravel + React
+              Full-Stack Developer React, Node.js (NestJS), Laravel
             </p>
             <p className={`mx-auto mt-2 max-w-xl text-sm font-medium sm:text-base md:mt-5 xl:text-lg ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
               I build fast, user-friendly web apps with React and Tailwind CSS on the
-              front end, and PHP, Laravel, and MySQL on the back end.
+              front end, and Node.js (NestJS), and Laravel on the back end.
             </p>
           </div>
         </div>

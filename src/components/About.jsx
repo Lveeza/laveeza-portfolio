@@ -5,24 +5,49 @@ const SKILL_GROUPS = [
   {
     title: 'Frontend',
     summary:
-      'Responsive UIs with React hooks, reusable components, and Tailwind CSS.',
-    items: ['JavaScript (ES6+)', 'React', 'Tailwind CSS', 'React Router'],
+      'Type-safe, responsive UIs with React hooks, reusable components, and Tailwind CSS.',
+    items: [
+      'TypeScript',
+      'JavaScript (ES6+)',
+      'React',
+      'Tailwind CSS',
+      'React Router',
+    ],
   },
   {
     title: 'Backend',
     summary:
-      'REST APIs with authentication, validation, caching, and automated tests.',
-    items: ['PHP 8', 'Laravel', 'MySQL', 'Sanctum', 'Redis', 'Pest'],
+      'Scalable REST APIs with authentication, ORMs, caching, and automated tests.',
+    items: [
+      'Node.js',
+      'NestJS',
+      'Prisma',
+      'PostgreSQL',
+      'PHP 8',
+      'Laravel',
+      'MySQL',
+      'Redis',
+      'Vitest',
+      'Pest',
+    ],
+  },
+  {
+    title: 'Tools & Deployment',
+    summary:
+      'Containerization, CI/CD pipelines, API testing, and cloud deployment.',
+    items: [
+      'Docker',
+      'GitHub Actions',
+      'Git & GitHub',
+      'Postman',
+      'Vercel',
+      'Supabase',
+    ],
   },
   {
     title: 'E-commerce & CMS',
     summary: 'Custom themes and client-ready stores.',
     items: ['Shopify Liquid', 'WordPress'],
-  },
-  {
-    title: 'Tools & Deployment',
-    summary: 'Version control, API testing, and production deployment.',
-    items: ['Git & GitHub', 'Docker', 'Postman', 'Vercel', 'Supabase'],
   },
 ]
 
@@ -47,19 +72,24 @@ export default function About() {
               It's me!
             </h2>
             <p className={`mb-4 leading-relaxed ${body}`}>
-              Hi, I'm Laveeza, a self-taught full-stack developer. I build React
-              frontends and Laravel REST APIs, and I care about clean code,
-              security, and tested features.
+              Hi, I'm Laveeza, a full-stack developer. I build React frontends
+              and scalable REST APIs using Node.js, NestJS, TypeScript, and
+              Laravel with a strong focus on clean code, security, and automated
+              testing.
             </p>
             <p className={`mb-4 leading-relaxed ${body}`}>
-              My main project is <strong>Postagram</strong>, a deployed social
-              media app with authentication, stories, real-time notifications,
-              and a Pest test suite. I also completed an internship at Roots and
-              built QOptix, a live Shopify store with a virtual try-on feature.
+              My key projects include Notes API (a containerized NestJS, Prisma,
+              and PostgreSQL backend with JWT authentication, strict data
+              isolation, and 61 Vitest tests) and Postagram (a deployed social
+              media app with real-time notifications, stories, and a Pest test
+              suite). I also work as a full-stack developer at Roots and built
+              QOptix, a live Shopify store featuring a custom virtual try-on
+              module.
             </p>
             <p className={`mb-4 leading-relaxed ${body}`}>
               I'm currently pursuing a Bachelor's degree in Computer Science,
-              and I'm looking for a full-stack role where I can keep growing.
+              and I'm looking for a full-stack or backend-focused role where I
+              can ship reliable software and keep growing.
             </p>
           </div>
 
